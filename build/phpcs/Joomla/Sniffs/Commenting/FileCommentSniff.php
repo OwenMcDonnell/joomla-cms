@@ -28,7 +28,6 @@
 
 class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 {
-    
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -52,70 +51,6 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
      * @var PHP_CodeSniffer_File
      */
     protected $currentFile = null;
-
-    /**
-     * Tags in correct order and related info.
-     *
-     * @var array
-     */
-    protected $tags = array(
-                       'version'    => array(
-                                        'required'       => false,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must be first',
-                                       ),
-                       'category'   => array(
-                                        'required'       => false,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'precedes @package',
-                                       ),
-                       'package'    => array(
-                                        'required'       => true,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must follows @category (if used)',
-                                       ),
-                       'subpackage' => array(
-                                        'required'       => false,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must follow @package',
-                                       ),
-                       'author'     => array(
-                                        'required'       => false,
-                                        'allow_multiple' => true,
-                                        'order_text'     => 'must follow @subpackage (if used) or @package',
-                                       ),
-                       'copyright'  => array(
-                                        'required'       => true,
-                                        'allow_multiple' => true,
-                                        'order_text'     => 'must follow @author (if used), @subpackage (if used) or @package',
-                                       ),
-                       'license'    => array(
-                                        'required'       => true,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must follow @copyright',
-                                       ),
-                       'link'       => array(
-                                        'required'       => false,
-                                        'allow_multiple' => true,
-                                        'order_text'     => 'must follow @license',
-                                       ),
-                       'see'        => array(
-                                        'required'       => false,
-                                        'allow_multiple' => true,
-                                        'order_text'     => 'must follow @link (if used) or @license',
-                                       ),
-                       'since'      => array(
-                                        'required'       => false,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must follows @see (if used), @link (if used) or @license',
-                                       ),
-                       'deprecated' => array(
-                                        'required'       => false,
-                                        'allow_multiple' => false,
-                                        'order_text'     => 'must follow @since (if used), @see (if used), @link (if used) or @license',
-                                       ),
-                );
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -170,10 +105,65 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
         // Required tags in correct order.
         $required = array(
-                     '@package'    => true,
-                     '@subpackage' => true,
-                     '@author'     => true,
-                     '@copyright'  => true,
+//                     '@package'    => true,
+//                     '@subpackage' => true,
+//                     '@author'     => true,
+//                     '@copyright'  => true,
+                       '@version'    => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must be first',
+                                       ),
+                       '@category'   => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'precedes @package',
+                                       ),
+                       '@package'    => array(
+                                        'required'       => true,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must follows @category (if used)',
+                                       ),
+                       '@subpackage' => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must follow @package',
+                                       ),
+                       '@author'     => array(
+                                        'required'       => false,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'must follow @subpackage (if used) or @package',
+                                       ),
+                       '@copyright'  => array(
+                                        'required'       => true,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'must follow @author (if used), @subpackage (if used) or @package',
+                                       ),
+                       '@license'    => array(
+                                        'required'       => true,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must follow @copyright',
+                                       ),
+                       '@link'       => array(
+                                        'required'       => false,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'must follow @license',
+                                       ),
+                       '@see'        => array(
+                                        'required'       => false,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'must follow @link (if used) or @license',
+                                       ),
+                       '@since'      => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must follows @see (if used), @link (if used) or @license',
+                                       ),
+                       '@deprecated' => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'must follow @since (if used), @see (if used), @link (if used) or @license',
+                                       ),
                     );
 
         $foundTags = array();
@@ -201,31 +191,31 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                 continue;
             }
 
-            if ($name === '@author') {
-                if ($tokens[$string]['content'] !== 'Squiz Pty Ltd <products@squiz.net>') {
-                    $error = 'Expected "Squiz Pty Ltd <products@squiz.net>" for author tag';
-                    $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectAuthor');
-                    if ($fix === true) {
-                        $expected = 'Squiz Pty Ltd <products@squiz.net>';
-                        $phpcsFile->fixer->replaceToken($string, $expected);
-                    }
-                }
-            } else if ($name === '@copyright') {
-                if (preg_match('/^([0-9]{4})(-[0-9]{4})? (Squiz Pty Ltd \(ABN 77 084 670 600\))$/', $tokens[$string]['content']) === 0) {
-                    $error = 'Expected "xxxx-xxxx Squiz Pty Ltd (ABN 77 084 670 600)" for copyright declaration';
-                    $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');
-                    if ($fix === true) {
-                        $matches = array();
-                        preg_match('/^(([0-9]{4})(-[0-9]{4})?)?.*$/', $tokens[$string]['content'], $matches);
-                        if (isset($matches[1]) === false) {
-                            $matches[1] = date('Y');
-                        }
-
-                        $expected = $matches[1].' Squiz Pty Ltd (ABN 77 084 670 600)';
-                        $phpcsFile->fixer->replaceToken($string, $expected);
-                    }
-                }
-            }//end if
+ //           if ($name === '@author') {
+ //               if ($tokens[$string]['content'] !== 'Squiz Pty Ltd <products@squiz.net>') {
+ //                   $error = 'Expected "must follow @subpackage (if used) or @package" for author tag';
+ //                   $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectAuthor');
+ //                   if ($fix === true) {
+ //                       $expected = 'must follow @subpackage (if used) or @package';
+ //                       $phpcsFile->fixer->replaceToken($string, $expected);
+ //                   }
+ //               }
+ //           } elseif ($name === '@copyright') {
+//                    if (preg_match('/^([0-9]{4})(-[0-9]{4})? (Joomla \(ABN 77 084 670 600\))$/', $tokens[$string]['content']) === 0) {
+//                        $error = 'Expected "xxxx-xxxx Squiz Pty Ltd (ABN 77 084 670 600)" for copyright declaration';
+//                        $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');
+//                    if ($fix === true) {
+//                        $matches = array();
+//                        preg_match('/^(([0-9]{4})(-[0-9]{4})?)?.*$/', $tokens[$string]['content'], $matches);
+//                        if (isset($matches[1]) === false) {
+//                            $matches[1] = date('Y');
+//                        }
+//
+//                        $expected = $matches[1].' Joomla (ABN 77 084 670 600)';
+//                        $phpcsFile->fixer->replaceToken($string, $expected);
+//                    }
+//                }
+//            }//end if
         }//end foreach
 
         // Check if the tags are in the correct position.
