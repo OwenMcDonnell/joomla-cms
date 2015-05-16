@@ -124,7 +124,9 @@ class Joomla_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
     {
         $tokens    = $phpcsFile->getTokens();
         $find   = PHP_CodeSniffer_Tokens::$methodPrefixes;
-        $find[] = T_ABSTRACT, T_WHITESPACE, T_FINAL;
+        $find[] = T_ABSTRACT;
+        $find[] = T_WHITESPACE;
+        $find[] = T_FINAL;
 
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
