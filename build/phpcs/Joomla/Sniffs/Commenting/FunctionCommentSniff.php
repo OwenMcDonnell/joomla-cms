@@ -31,43 +31,6 @@ if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
  */
 class Joomla_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
 {
-
-    /**
-     * The name of the method that we are currently processing.
-     *
-     * @var string
-     */
-    private $_methodName = '';
-
-    /**
-     * The position in the stack where the fucntion token was found.
-     *
-     * @var int
-     */
-    private $_functionToken = null;
-
-    /**
-     * The position in the stack where the class token was found.
-     *
-     * @var int
-     */
-    private $_classToken = null;
-
-    /**
-     * The function comment parser for the current method.
-     *
-     * @var PHP_CodeSniffer_Comment_Parser_FunctionCommentParser
-     */
-    protected $commentParser = null;
-
-    /**
-     * The current PHP_CodeSniffer_File object we are processing.
-     *
-     * @var PHP_CodeSniffer_File
-     */
-    protected $currentFile = null;
-
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
