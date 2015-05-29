@@ -1,38 +1,30 @@
 <?php
 /**
- * Parses and verifies the class doc comment.
+ * Parses and verifies the doc comments for classes.
  *
  * PHP version 5
  *
  * @category  PHP
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-
 /**
- * Parses and verifies the class doc comment.
- *
- * Verifies that :
- * <ul>
- *  <li>A class doc comment exists.</li>
- *  <li>There is exactly one blank line before the class comment.</li>
- *  <li>There are no blank lines after the class comment.</li>
- *  <li>Short and long descriptions end with a full stop and start with capital letter.</li>
- *  <li>There is a blank line between descriptions.</li>
- * </ul>
+ * Parses and verifies the doc comments for classes.
  *
  * @category  PHP
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Joomla_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Sniff
+class Joomla_Sniffs_Commenting_ClassCommentSniff extends PEAR_Sniffs_Commenting_FileCommentSniff
 {
      /**
      * Returns an array of tokens this test wants to listen for.
@@ -122,19 +114,26 @@ class Joomla_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
+        $this->currentFile = $phpcsFile;
         $tokens    = $phpcsFile->getTokens();
+        $type      = strtolower($tokens[$stackPtr]['content']);
+        $errorData = array($type);
+        
         $find   = PHP_CodeSniffer_Tokens::$methodPrefixes;
         $find[] = T_ABSTRACT;
         $find[] = T_WHITESPACE;
         $find[] = T_FINAL;
 
-        $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
+$commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
             && $tokens[$commentEnd]['code'] !== T_COMMENT
         ) {
             $phpcsFile->addError('Missing class doc comment', $stackPtr, 'Missing');
+            $phpcsFile->recordMetric($stackPtr, 'Class has doc comment', 'no');
             return;
-        } 
+        } else {
+            $phpcsFile->recordMetric($stackPtr, 'Class has doc comment', 'yes');
+        }
         // Try and determine if this is a file comment instead of a class comment.
         // We assume that if this is the first comment after the open PHP tag, then
         // it is most likely a file comment instead of a class comment.
@@ -143,7 +142,6 @@ class Joomla_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
         } else {
             $start = $phpcsFile->findPrevious(T_COMMENT, ($commentEnd - 1), null, true);
         }
-
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, $start, null, true);
         if ($tokens[$prev]['code'] === T_OPEN_TAG) {
             $prevOpen = $phpcsFile->findPrevious(T_OPEN_TAG, ($prev - 1));
@@ -154,53 +152,35 @@ class Joomla_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
                 return;
             }
         }
-
         if ($tokens[$commentEnd]['code'] === T_COMMENT) {
             $phpcsFile->addError('You must use "/**" style comments for a class comment', $stackPtr, 'WrongStyle');
             return;
         }
-
-        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
-            $error = 'There must be no blank lines after the class comment';
-            $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
-        }
-
-        $commentStart = $tokens[$commentEnd]['comment_opener'];
-        if ($tokens[$prev]['line'] !== ($tokens[$commentStart]['line'] - 2)) {
-            $error = 'There must be exactly one blank line before the class comment';
-            $phpcsFile->addError($error, $commentStart, 'SpacingBefore');
-        }
-
-        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
-            $error = '%s tag is not allowed in class comment';
-            $data  = array($tokens[$tag]['content']);
-            $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
-        }
-
+        // Check each tag.
+        $this->processTags($phpcsFile, $stackPtr, $tokens[$commentEnd]['comment_opener']);
     }//end process()
-
     /**
      * Process the version tag.
      *
-     * @param int $errorPos The line number where the error occurs.
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param array                $tags      The tokens for these tags.
      *
      * @return void
      */
-    protected function processVersion($errorPos)
+    protected function processVersion(PHP_CodeSniffer_File $phpcsFile, array $tags)
     {
-        $version = $this->commentParser->getVersion();
-        if ($version !== null) {
-            $content = $version->getContent();
-            $matches = array();
-            if (empty($content) === true) {
-                $error = 'Content missing for @version tag in doc comment';
-                $this->currentFile->addError($error, $errorPos, 'EmptyVersion');
-            } else if ((strstr($content, 'Release:') === false)) {
+        $tokens = $phpcsFile->getTokens();
+        foreach ($tags as $tag) {
+            if ($tokens[($tag + 2)]['code'] !== T_DOC_COMMENT_STRING) {
+                // No content.
+                continue;
+            }
+            $content = $tokens[($tag + 2)]['content'];
+            if ((strstr($content, 'Release:') === false)) {
                 $error = 'Invalid version "%s" in doc comment; consider "Release: <package_version>" instead';
                 $data  = array($content);
-                $this->currentFile->addWarning($error, $errorPos, 'InvalidVersion', $data);
+                $phpcsFile->addWarning($error, $tag, 'InvalidVersion', $data);
             }
         }
     }//end processVersion()
 }//end class
-?>
