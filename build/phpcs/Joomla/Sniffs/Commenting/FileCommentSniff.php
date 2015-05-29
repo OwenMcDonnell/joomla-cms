@@ -391,7 +391,7 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 //                if ($bit !== '') {
 //                    $newName .= strtoupper($bit{0}).substr($bit, 1).'_';
 //                }
-            }
+//            }
             $error     = '@subpackage tag must contain a name';
 //            $validName = trim($newName, '_');
 //            $data      = array(
