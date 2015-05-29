@@ -383,22 +383,22 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             if (PHP_CodeSniffer::isUnderscoreName($content) === true) {
                 continue;
             }
-            $newContent = str_replace(' ', '_', $content);
-            $nameBits   = explode('_', $newContent);
-            $firstBit   = array_shift($nameBits);
-            $newName    = strtoupper($firstBit{0}).substr($firstBit, 1).'_';
-            foreach ($nameBits as $bit) {
-                if ($bit !== '') {
-                    $newName .= strtoupper($bit{0}).substr($bit, 1).'_';
-                }
+//            $newContent = str_replace(' ', '_', $content);
+//            $nameBits   = explode('_', $newContent);
+//            $firstBit   = array_shift($nameBits);
+//            $newName    = strtoupper($firstBit{0}).substr($firstBit, 1).'_';
+//            foreach ($nameBits as $bit) {
+//                if ($bit !== '') {
+//                    $newName .= strtoupper($bit{0}).substr($bit, 1).'_';
+//                }
             }
-            $error     = 'Subpackage name "%s" is not valid; consider "%s" instead';
-            $validName = trim($newName, '_');
-            $data      = array(
-                          $content,
-                          $validName,
-                         );
-            $phpcsFile->addError($error, $tag, 'InvalidSubpackage', $data);
+            $error     = '@subpackage tag must contain a name';
+//            $validName = trim($newName, '_');
+//            $data      = array(
+//                          $content,
+//                          $validName,
+//                         );
+            $phpcsFile->addError($error, $tag, 'EmptySubpackage');
         }//end foreach
     }//end processSubpackage()
 
