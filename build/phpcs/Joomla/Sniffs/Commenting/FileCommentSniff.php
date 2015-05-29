@@ -220,7 +220,7 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         $foundTags = array();
         $tagTokens = array();
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
-            $name = $tokens[$tag]['content'];
+            $name = $tokens[$tag]['code'];
             if (isset($this->tags[$name]) === false) {
                 continue;
             }
@@ -431,7 +431,7 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                 // No content.
                 continue;
             }
-            $content = $tokens[($tag + 2)]['content'];
+            $content = $tokens[($tag + 2)]['code'];
             $matches = array();
             if (preg_match('/^([0-9]{4})((.{1})([0-9]{4}))? (.+)$/', $content, $matches) !== 0) {
                 // Check earliest-latest year order.
@@ -494,7 +494,7 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                 // No content.
                 continue;
             }
-            $content = $tokens[($tag + 2)]['content'];
+            $content = $tokens[($tag + 2)]['code'];
             if (strstr($content, 'CVS:') === false
                 && strstr($content, 'SVN:') === false
                 && strstr($content, 'GIT:') === false
