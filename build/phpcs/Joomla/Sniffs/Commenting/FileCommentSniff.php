@@ -380,25 +380,11 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                 continue;
             }
             $content = $tokens[($tag + 2)]['content'];
-            if (PHP_CodeSniffer::isUnderscoreName($content) === true) {
-                continue;
-            }
-//            $newContent = str_replace(' ', '_', $content);
-//            $nameBits   = explode('_', $newContent);
-//            $firstBit   = array_shift($nameBits);
-//            $newName    = strtoupper($firstBit{0}).substr($firstBit, 1).'_';
-//            foreach ($nameBits as $bit) {
-//                if ($bit !== '') {
-//                    $newName .= strtoupper($bit{0}).substr($bit, 1).'_';
-//                }
-//            }
-            $error     = '@subpackage tag must contain a name';
-//            $validName = trim($newName, '_');
-//            $data      = array(
-//                          $content,
-//                          $validName,
-//                         );
+            //is the subpackage included and empty
+            if (empty($content) || $content == '') {
+            $error     = 'if included, @subpackage tag must contain a name';
             $phpcsFile->addError($error, $tag, 'EmptySubpackage');
+            }
         }//end foreach
     }//end processSubpackage()
 
