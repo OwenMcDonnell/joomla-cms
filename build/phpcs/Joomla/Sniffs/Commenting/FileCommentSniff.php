@@ -182,16 +182,16 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG) {
                 break;
             } else if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING
-                && strstr(strtolower($tokens[$i]['content']), 'php version') !== false
+//                && strstr(strtolower($tokens[$i]['content']), 'php version') !== false
             ) {
                 $found = true;
                 break;
             }
         }
-        if ($found === false) {
-            $error = 'PHP version not specified';
-            $phpcsFile->addWarning($error, $commentEnd, 'MissingVersion');
-        }
+//        if ($found === false) {
+//            $error = 'PHP version not specified';
+//            $phpcsFile->addWarning($error, $commentEnd, 'MissingVersion');
+//        }
         // Check each tag.
         $this->processTags($phpcsFile, $stackPtr, $commentStart);
         // Ignore the rest of the file.
