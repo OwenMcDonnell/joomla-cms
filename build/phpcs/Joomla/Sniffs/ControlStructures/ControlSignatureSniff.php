@@ -8,16 +8,13 @@
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   CVS: $Id: ControlSignatureSniff.php 244676 2007-10-23 06:05:14Z squiz $
+ * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-
 if (class_exists('PHP_CodeSniffer_Standards_AbstractPatternSniff', true) === false) {
-	throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractPatternSniff not found');
+    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractPatternSniff not found');
 }
-
 /**
  * Verifies that control statements conform to their coding standards.
  *
@@ -25,82 +22,84 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractPatternSniff', true) === fal
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   Release: 1.3.0RC2
+ * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSniffer_Standards_AbstractPatternSniff
 {
+    /**
+     * If true, comments will be ignored if they are found in the code.
+     *
+     * @var boolean
+     */
+    public $ignoreComments = true;
 
-	/**
-	 * Constructs a Joomla_Sniffs_ControlStructures_ControlSignatureSniff.
-	 */
-	public function __construct()
-	{
-		parent::__construct(true);
+    /**
+     * A list of tokenizers this sniff supports.
+     *
+     * @var array
+     */
+    public $supportedTokenizers = array(
+                                   'PHP',
+                                   'JS',
+                                  );
 
-	}//end __construct()
+    /**
+     * Patterns that this test wishes to verify
+     *
+     * @var array 
+     */
+    public $patternArray = array(
+                'do {EOL...} while (...);EOL',
+                'while (...) {EOL',
+                'for (...) {EOL',
+                'if (...) {EOL',
+                'foreach (...) {EOL',
+                '} else if (...) {EOL',
+                '} elseif (...) {EOL',
+                '} else {EOL',
+                'do {EOL',
+               );
 
-	/**
-	 * Returns the patterns that this test wishes to verify.
-	 *
-	 * @return array(string)
-	 */
-	protected function getPatterns()
-	{
-		return array(
-			'if (...)EOL...{...}EOL...elseEOL',
-			'if (...)EOL...{...}EOL...elseif (...)EOL',
-			'if (...)EOL',
+    /**
+     * Tokens that this test wishes to check
+     *
+     * @var array 
+     */
+    public $tokenType = array(
+                T_TRY,
+                T_CATCH,
+                T_DO,
+                T_WHILE,
+                T_FOR,
+                T_IF,
+                T_FOREACH,
+                T_ELSE,
+                T_ELSEIF,
+                T_SWITCH,
+               );
 
-			'tryEOL...{EOL...}EOL',
-			'catch (...)EOL...{EOL',
-
-			'doEOL...{...}EOL',
-			'while (...)EOL...{EOL',
-
-			'for (...)EOL...{EOL',
-			'foreach (...)EOL...{EOL',
-
-			'switch (...)EOL...{EOL',
-		);
-
+    /**
+     * Returns the patterns that this test wishes to verify.
+     *
+     * @return string[]
+     */
+    protected function getPatterns()
+    {
+		return $patternArray;
 	}//end getPatterns()
-
+	
 	/**
-	 * Process a pattern.
-	 *
-	 * Returns if we are inside a "tmpl" folder - workaround for the Joomla! CMS :(
-	 *
-	 * @param array $patternInfo Information about the pattern used for checking, which includes are
-	 *               parsed token representation of the pattern.
-	 * @param PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where the token occured.
-	 * @param integer $stackPtr The postion in the tokens stack where the listening token type was found.
-	 *
-	 * @return return_type
-	 */
-	protected function processPattern($patternInfo, PHP_CodeSniffer_File $phpcsFile
-	, $stackPtr)
-	{
-		if (0)
-		{
-			/*
-			 * @todo disabled - This is a special sniff for the Joomla! CMS to exclude
-			* the tmpl folder which may contain constructs in colon notation
-			*/
-
-			$parts = explode(DIRECTORY_SEPARATOR, $phpcsFile->getFileName());
-
-			if ('tmpl' == $parts[count($parts) - 2])
-			{
-				return false;
-			}
-		}
-
-		return parent::processPattern($patternInfo, $phpcsFile, $stackPtr);
-	}//function
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return int[]
+     */
+    public function register()
+    {
+        return $tokenType;
+    }//end register()
 
 }//end class
-
 ?>
