@@ -51,7 +51,23 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      *
      * @var array 
      */
-    public $patternArray = array(
+    public $patternArray;
+
+    /**
+     * Tokens that this test wishes to check
+     *
+     * @var array 
+     */
+    public $tokenType;
+
+    /**
+     * Returns the patterns that this test wishes to verify.
+     *
+     * @return string[]
+     */
+    protected function getPatterns()
+    {
+    	$patternArray = array(
                 'do {EOL...} while (...);EOL',
                 'while (...) {EOL',
                 'for (...) {EOL',
@@ -62,13 +78,17 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                 '} else {EOL',
                 'do {EOL',
                );
-
-    /**
-     * Tokens that this test wishes to check
+		return $patternArray;
+	}//end getPatterns()
+	
+	/**
+     * Returns an array of tokens this test wants to listen for.
      *
-     * @var array 
+     * @return int[]
      */
-    public $tokenType = array(
+    public function register()
+    {
+    	$tokenType = array(
                 T_TRY,
                 T_CATCH,
                 T_DO,
@@ -80,24 +100,6 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                 T_ELSEIF,
                 T_SWITCH,
                );
-
-    /**
-     * Returns the patterns that this test wishes to verify.
-     *
-     * @return string[]
-     */
-    protected function getPatterns(array $patternArray)
-    {
-		return $patternArray;
-	}//end getPatterns()
-	
-	/**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
-     */
-    public function register(array $tokenType)
-    {
         return $tokenType;
     }//end register()
 
