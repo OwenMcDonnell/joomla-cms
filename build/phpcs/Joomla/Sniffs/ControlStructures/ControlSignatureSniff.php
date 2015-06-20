@@ -86,7 +86,7 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      *
      * @return string[]
      */
-    protected function getPatterns()
+    protected function getPatterns(array $patternArray)
     {
 		return $patternArray;
 	}//end getPatterns()
@@ -96,7 +96,7 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      *
      * @return int[]
      */
-    public function register()
+    public function register(array $tokenType)
     {
         return $tokenType;
     }//end register()
