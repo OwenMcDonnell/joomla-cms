@@ -46,7 +46,6 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                                    'JS',
                                   );
 
-
     /**
      * Returns the patterns that this test wishes to verify.
      *
@@ -54,17 +53,18 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      */
     protected function getPatterns()
     {
-    	return array(
-                'do {EOL...} while (...);EOL',
-                'while (...) {EOL',
-                'for (...) {EOL',
-                'if (...) {EOL',
-                'foreach (...) {EOL',
-                '} else if (...) {EOL',
-                '} elseif (...) {EOL',
-                '} else {EOL',
-                'do {EOL',
-               );
+		return array(
+			'if (...)EOL',
+			'}EOL...elseif (...)EOL',
+			'}EOL...elseEOL',
+			'tryEOL...{EOL...}EOL',
+			'catch (...)EOL...{EOL',
+			'doEOL...{...}EOL',
+			'while (...)EOL...{EOL',
+			'for (...)EOL...{EOL',
+			'foreach (...)EOL...{EOL',
+			'switch (...)EOL...{EOL',
+		);
 	}//end getPatterns()
 	
 	/**
