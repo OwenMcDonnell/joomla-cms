@@ -46,19 +46,6 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                                    'JS',
                                   );
 
-    /**
-     * Patterns that this test wishes to verify
-     *
-     * @var array 
-     */
-    public $patternArray;
-
-    /**
-     * Tokens that this test wishes to check
-     *
-     * @var array 
-     */
-    public $tokenType;
 
     /**
      * Returns the patterns that this test wishes to verify.
@@ -67,7 +54,7 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      */
     protected function getPatterns()
     {
-    	$patternArray = array(
+    	return array(
                 'do {EOL...} while (...);EOL',
                 'while (...) {EOL',
                 'for (...) {EOL',
@@ -78,7 +65,6 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                 '} else {EOL',
                 'do {EOL',
                );
-		return $patternArray;
 	}//end getPatterns()
 	
 	/**
@@ -88,7 +74,7 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
      */
     public function register()
     {
-    	$tokenType = array(
+    	return array(
                 T_TRY,
                 T_CATCH,
                 T_DO,
@@ -100,8 +86,6 @@ class Joomla_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSnif
                 T_ELSEIF,
                 T_SWITCH,
                );
-        return $tokenType;
     }//end register()
-
 }//end class
 ?>
