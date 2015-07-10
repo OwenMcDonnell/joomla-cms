@@ -74,7 +74,7 @@
             "require-dev": {
                 "joomla/test": "~1.1",
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "joomla-package",
             "extra": {
@@ -156,7 +156,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "joomla-package",
             "extra": {
@@ -244,7 +244,7 @@
                 "joomla/language": "~1.0",
                 "joomla/string": "~1.0",
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "suggest": {
                 "joomla/language": "Required only if you want to use `OutputFilter::stringURLSafe`.",
@@ -296,7 +296,7 @@
             "require-dev": {
                 "joomla/test": "~1.0",
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "joomla-package",
             "extra": {
@@ -346,7 +346,7 @@
             "require-dev": {
                 "joomla/test": "~1.0",
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*",
+                "squizlabs/php_codesniffer": "2.*",
                 "symfony/yaml": "~2.0"
             },
             "suggest": {
@@ -442,7 +442,7 @@
             "require-dev": {
                 "joomla/test": "~1.0",
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "joomla-package",
             "extra": {
@@ -526,7 +526,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "joomla-package",
             "extra": {
@@ -1534,16 +1534,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "1.5.6",
+            "version": "2.*",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "6f3e42d311b882b25b4d409d23a289f4d3b803d5"
+                "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6f3e42d311b882b25b4d409d23a289f4d3b803d5",
-                "reference": "6f3e42d311b882b25b4d409d23a289f4d3b803d5",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/c1a26c729508f73560c1a4f767f60b8ab6b4a666",
+                "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666",
                 "shasum": ""
             },
             "require": {
