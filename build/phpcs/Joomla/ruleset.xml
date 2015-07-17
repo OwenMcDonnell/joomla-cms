@@ -172,6 +172,7 @@
 	<exclude-pattern type="relative">administrator/components/*</exclude-pattern>
 	<exclude-pattern type="relative">components/*</exclude-pattern>
 </rule>
+<rule ref="Squiz.Scope.StaticThisUsage" />
 <rule ref="Squiz.Strings.ConcatenationSpacing">
 	<properties>
 		<property name="spacing" value="1"/>
