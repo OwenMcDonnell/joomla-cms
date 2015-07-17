@@ -194,6 +194,7 @@
 	<exclude-pattern type="relative">modules/*</exclude-pattern>
 	<exclude-pattern type="relative">libraries/cms/*</exclude-pattern>
 </rule>
+<rule ref="Squiz.WhiteSpace.ControlStructureSpacing" />
 <rule ref="Squiz.WhiteSpace.MemberVarSpacing">
 	<!-- These exceptions are temporary for now -->
 	<exclude-pattern type="relative">administrator/components/*</exclude-pattern>
