@@ -159,6 +159,7 @@
 	<exclude-pattern type="relative">libraries/joomla/*</exclude-pattern>
 	<exclude-pattern type="relative">cli/*</exclude-pattern>
 </rule>
+<rule ref="Squiz.NamingConventions.ValidVariableName" />
 <rule ref="Squiz.Operators.IncrementDecrementUsage">
 	<exclude name="Squiz.Operators.IncrementDecrementUsage.processAssignment" />
 	<!-- These exceptions are temporary -->
