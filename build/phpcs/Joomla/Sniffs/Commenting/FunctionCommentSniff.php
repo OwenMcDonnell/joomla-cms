@@ -81,7 +81,7 @@ class Joomla_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			{
 				// Check return type (can have multiple return types separated by '|').
 				$typeNames      = explode('|', $content);
-				$suggestedNames = [];
+				$suggestedNames = array();
 
 				foreach ($typeNames as $i => $typeName)
 				{
