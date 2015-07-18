@@ -34,71 +34,15 @@ class Joomla_Sniffs_Classes_InstantiateNewClassesSniff implements PHP_CodeSniffe
      * @param PHP_CodeSniffer_File $phpcsFile The file where the token was found.
      * @param int                  $stackPtr  The position in the stack where
      *                                        the token was found.
-     *
+     * 
      * @return void
+     * @TODO  improve handling for Instantiate New Classes when there is whitespace between the PARENTHESIS
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        $running = true;
-        $valid = false;
-        $started = false;
-
-        $cnt = $stackPtr + 1;
-
-        do
-        {
-            if( ! isset($tokens[$cnt]))
-            {
-                $running = false;
-            }
-            else
-            {
-                switch ($tokens[$cnt]['code'])
-                {
-                    case T_SEMICOLON:
-                    case T_COMMA :
-                        $valid = true;
-                        $running = false;
-                        break;
-
-                    case T_OPEN_PARENTHESIS :
-                        $started = true;
-                        break;
-
-                    case T_VARIABLE :
-                    case T_STRING :
-                    case T_LNUMBER :
-                    case T_CONSTANT_ENCAPSED_STRING :
-                    case T_DOUBLE_QUOTED_STRING :
-                        if($started)
-                        {
-                            $valid = true;
-                            $running = false;
-                        }
-
-                        break;
-
-                    case T_CLOSE_PARENTHESIS :
-                        if( ! $started)
-                        {
-                            $valid = true;
-                        }
-
-                         $running = false;
-                        break;
-
-                    case T_WHITESPACE :
-                        break;
-                }//switch
-
-                $cnt ++;
-            }
-        }
-        while ($running == true);
-
-        if( ! $valid)
+        if($tokens[($stackPtr)]['code'] === T_OPEN_PARENTHESIS && $tokens[($stackPtr + 1)]['code'] === T_CLOSE_PARENTHESIS)
         {
             $error = 'Instanciating new classes without parameters does not require brackets.';
             $phpcsFile->addError($error, $stackPtr, 'New class');
