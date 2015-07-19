@@ -185,7 +185,7 @@ class Joomla_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 
 			if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING)
 			{
-				$matches = [];
+				$matches = array();
 				preg_match('/([^$&]+)(?:((?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
 
 				$typeLen   = strlen($matches[1]);
