@@ -93,7 +93,16 @@ class Joomla_Sniffs_Classes_InstantiateNewClassesSniff implements PHP_CodeSniffe
 		if (!$valid)
 		{
 			$error = 'Instanciating new classes without parameters does not require brackets.';
-			$phpcsFile->addError($error, $stackPtr, 'New class');
+			$fix   = $phpcsFile->addFixableError($error, $stackPtr, 'New class');
+		        if ($fix === true)
+		        {
+				$tokens = $phpcsFile->getTokens();
+				$opener = $tokens[$stackPtr]['parenthesis_opener'];
+				$closer = $tokens[$stackPtr]['parenthesis_closer'];
+				$phpcsFile->fixer->beginChangeset();
+				$phpcsFile->fixer->replaceToken($stackPtr, '()');
+				$phpcsFile->fixer->endChangeset();
+		        }
 		}
 	}
 }
