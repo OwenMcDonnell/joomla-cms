@@ -170,6 +170,7 @@
 	<!-- These exceptions are temporary -->
 	<exclude-pattern type="relative">administrator/components/*</exclude-pattern>
 </rule>
+<rule ref="Squiz.PHP.CommentedOutCode" />
 <rule ref="Squiz.PHP.GlobalKeyword">
 	<message>Do not use global variables. Use static class properties or constants instead of globals.</message>
 </rule>
