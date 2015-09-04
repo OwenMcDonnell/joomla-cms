@@ -254,4 +254,8 @@
 	<exclude-pattern type="relative">layouts/*</exclude-pattern>
 	<exclude-pattern type="relative">installation/template/index.php</exclude-pattern>
 </rule>
+
+<rule ref="Joomla">
+  <exclude name="Joomla.NamingConventions.ValidVariableName"/>
+</rule>
 </ruleset>
