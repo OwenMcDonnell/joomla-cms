@@ -256,6 +256,6 @@
 </rule>
 
 <rule ref="Joomla.NamingConventions.ValidVariableName">
-	<severity>0</severity>
+	<exclude name="Joomla.NamingConventions.ValidVariableName.NotCamelCaps" />
 </rule>
 </ruleset>
