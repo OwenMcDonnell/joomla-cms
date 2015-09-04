@@ -255,7 +255,7 @@
 	<exclude-pattern type="relative">installation/template/index.php</exclude-pattern>
 </rule>
 
-<rule ref="Joomla">
-  <exclude name="Joomla.NamingConventions.ValidVariableName"/>
+<rule ref="Joomla.NamingConventions.ValidVariableName">
+	<severity>0</severity>
 </rule>
 </ruleset>
