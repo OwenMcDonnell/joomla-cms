@@ -99,6 +99,9 @@
 <rule ref="PEAR.Classes.ClassDeclaration" />
 <rule ref="PEAR.Commenting.InlineComment" />
 <rule ref="PEAR.ControlStructures.MultiLineCondition">
+	<properties>
+		<property name="indent" value="1"/>
+	</properties>
 	<exclude name="PEAR.ControlStructures.MultiLineCondition.NewlineBeforeOpenBrace"/>
 	<!-- These exceptions are permanent -->
 	<exclude-pattern type="relative">*/tmpl/*</exclude-pattern>
@@ -108,6 +111,9 @@
 </rule>
 <rule ref="PEAR.Formatting.MultiLineAssignment" />
 <rule ref="PEAR.Functions.FunctionCallSignature">
+	 <properties>
+ 		<property name="indent" value="1"/>
+ 	</properties>
 	<exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine" />
 </rule>
 <rule ref="PEAR.Functions.FunctionDeclaration">
@@ -139,8 +145,11 @@
 <rule ref="Squiz.CSS.SemicolonSpacing" />
 <rule ref="Squiz.Classes.SelfMemberReference" />
 <rule ref="Squiz.Commenting.BlockComment">
-	<exclude name="Squiz.Commenting.BlockComment.NoEmptyLineAfter"/>
-	<exclude name="Squiz.Commenting.BlockComment.HasEmptyLineBefore"/>
+		<exclude name="Squiz.Commenting.BlockComment.FirstLineIndent"/>
+		<exclude name="Squiz.Commenting.BlockComment.LineIndent"/>
+		<exclude name="Squiz.Commenting.BlockComment.LastLineIndent"/>
+		<exclude name="Squiz.Commenting.BlockComment.NoEmptyLineBefore"/>
+		<exclude name="Squiz.Commenting.BlockComment.NoEmptyLineAfter"/>
 </rule>
 <rule ref="Squiz.Commenting.DocCommentAlignment">
 	<!-- These exceptions are temporary for now -->
