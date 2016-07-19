@@ -131,6 +131,8 @@ class JDocumentHtmlTest extends TestCase
 	 */
 	public function testEnsureMergeHeadDataReturnsThisObject()
 	{
+		var_dump($this->object->mergeHeadData($this->testHeadData));
+
 		$this->assertSame($this->object, $this->object->mergeHeadData($this->testHeadData));
 	}
 
