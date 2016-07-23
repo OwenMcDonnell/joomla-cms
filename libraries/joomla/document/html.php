@@ -218,8 +218,6 @@ class JDocumentHtml extends JDocument
 			}
 		}
 
-		var_dump(array_unique(array_merge($this->_links, $data['links'])));
-
 		$this->_links = (isset($data['links']) && !empty($data['links']) && is_array($data['links']))
 			? array_unique(array_merge($this->_links, $data['links']))
 			: $this->_links;
