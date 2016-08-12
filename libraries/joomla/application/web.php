@@ -1100,8 +1100,6 @@ class JApplicationWeb extends JApplicationBase
 		}
 		// @codeCoverageIgnoreEnd
 
-		var_dump($this->get('site_uri'));
-
 		// Check to see if an explicit base URI has been set.
 		$siteUri = trim($this->get('site_uri'));
 
