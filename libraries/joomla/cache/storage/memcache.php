@@ -194,6 +194,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @since   11.1
 	 */
 	public function store($id, $group, $data)
+
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 
