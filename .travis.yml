@@ -15,23 +15,58 @@ env:
 matrix:
   fast_finish: true
   include:
+    #- php: 5.6
+    #  env: RUN_PHPCS="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
+    #- php: 5.3
+    #  env: INSTALL_APC="yes"
+    #- php: 5.4
+    #  env: INSTALL_APC="yes"
+    #- php: 5.5
+    #  env: INSTALL_APCU="yes"
     - php: 5.6
-      env: RUN_PHPCS="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
-    - php: 5.3
-      env: INSTALL_APC="yes"
-    - php: 5.4
-      env: INSTALL_APC="yes"
-    - php: 5.5
       env: INSTALL_APCU="yes"
-    - php: 5.6
-      env: INSTALL_APCU="yes"
-    - php: 7.0
-      env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
-    - node_js: 6.1
+    #- php: 7.0
+    #  env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
+    #- node_js: 6.1
+    #  sudo: true
+    #  env: RUN_JAVASCRIPT_TESTS="yes" RUN_UNIT_TESTS="no"
+    #- php: 7.1
+    #  env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
+    - php: hhvm-3.12
       sudo: true
-      env: RUN_JAVASCRIPT_TESTS="yes" RUN_UNIT_TESTS="no"
-    - php: 7.1
-      env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
+      dist: trusty
+      group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+      services:
+        - mysql
+        - postgresql
+        - memcache
+        - memcached
+        - redis-server
+      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+    - php: hhvm-3.12
+      sudo: true
+      dist: trusty
+      group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+      services:
+        - mysql
+        - postgresql
+        - memcache
+        - memcached
+        - redis-server
+      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+# current is 3.15 dev
     - php: hhvm
       sudo: true
       dist: trusty
@@ -45,12 +80,65 @@ matrix:
       services:
         - mysql
         - postgresql
+        - memcache
+        - memcached
         - redis-server
-      env: INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" # Disabled items that currently do not work in travis-ci hhvm
-  allow_failures:
-    - php: 7.1
+      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm
-    - node_js: 6.1
+      sudo: true
+      dist: trusty
+      group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+      services:
+        - mysql
+        - postgresql
+        - memcache
+        - memcached
+        - redis-server
+      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+    - php: hhvm-nightly
+      sudo: true
+      dist: trusty
+      group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+      services:
+        - mysql
+        - postgresql
+        - memcache
+        - memcached
+        - redis-server
+      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+    - php: hhvm-nightly
+      sudo: true
+      dist: trusty
+      group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+      services:
+        - mysql
+        - postgresql
+        - memcache
+        - memcached
+        - redis-server
+      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+  allow_failures:
+    - php: hhvm-3.12
+    - php: hhvm
+    - php: hhvm-nightly
 
 services:
   - memcache
@@ -61,6 +149,7 @@ before_script:
   # JavaScript tests
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/javascript-tests.sh $PWD; fi
   # Make sure all dev dependencies are installed
+  - if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
 
 script:
