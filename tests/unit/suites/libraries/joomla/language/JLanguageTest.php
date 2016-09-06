@@ -760,6 +760,11 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testParse()
 	{
+		if (defined('HHVM_VERSION'))
+		{
+			$this->markTestSkipped('testParse has a configuration issue on HHVM and is skipped.');
+        }
+
 		$strings = $this->inspector->parse(__DIR__ . '/data/good.ini');
 
 		$this->assertThat(
