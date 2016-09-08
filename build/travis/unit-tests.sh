@@ -17,7 +17,7 @@ if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then alias composer="hhvm -v ResourceLimit.
 # Make sure all dev dependencies are installed
 composer install
 if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
-if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.dynamic_extensions[pgsql] = pgsql.so >> /etc/hhvm/php.ini; fi
+# if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.dynamic_extensions[pgsql] = pgsql.so >> /etc/hhvm/php.ini; fi
 
 # Setup databases for testing
 mysql -u root -e 'create database joomla_ut;'
