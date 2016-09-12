@@ -110,6 +110,9 @@ services:
   - memcached
   - redis-server
 
+before_install:
+  - "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
+
 before_script:
   # JavaScript tests
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/javascript-tests.sh $PWD; fi
