@@ -112,6 +112,7 @@ services:
 
 before_install:
   - "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
+  - free -m
 
 before_script:
   # JavaScript tests
