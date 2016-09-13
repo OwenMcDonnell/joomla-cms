@@ -126,7 +126,7 @@ before_script:
 script:
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(get_loaded_extensions());'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'ini_set("error_reporting", E_ALL);'; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'ini_set('memory_limit','512M');'; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'ini_set("memory_limit","512M");'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(ini_get("memory_limit") / 1048576);'; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
