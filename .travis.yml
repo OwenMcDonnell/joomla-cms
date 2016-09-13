@@ -118,8 +118,8 @@ before_script:
   # JavaScript tests
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/javascript-tests.sh $PWD; fi
   # Make sure all dev dependencies are installed
-  - if [[ $HHVMPHP7 == "yes" ]]; then hhvm --php -r 'ini_set("hhvm.php7.all", 1);'; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'ini_set("xdebug.enable", 1);'; fi
+  - if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.enable=1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then alias composer="hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer"; fi
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
 
