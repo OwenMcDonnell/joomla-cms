@@ -111,7 +111,7 @@ services:
   - redis-server
 
 before_install:
-  - "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
+  #- "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
   - free -m
 
 before_script:
