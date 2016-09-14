@@ -129,7 +129,7 @@ script:
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'ini_set("memory_limit","28M");'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(ini_get("memory_limit") / 1048576);'; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
-  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml -d memory_limit=128M; fi
+  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml -d memory_limit=130M; fi
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then tests/javascript/node_modules/karma/bin/karma start karma.conf.js --single-run ; fi
 
 branches:
