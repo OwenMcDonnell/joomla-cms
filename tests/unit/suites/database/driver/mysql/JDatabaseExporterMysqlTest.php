@@ -130,7 +130,7 @@ class JDatabaseExporterMysqlTest extends TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->dbo);
+		$this->dbo = null;
 		parent::tearDown();
 	}
 
