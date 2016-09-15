@@ -129,7 +129,7 @@ before_script:
 script:
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(get_loaded_extensions());'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo error_reporting=E_ALL >> /etc/hhvm/php.ini; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo memory_limit=6G >> /etc/hhvm/php.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo memory_limit -1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(ini_get("memory_limit") / 1048576);'; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
