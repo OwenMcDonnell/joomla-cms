@@ -208,8 +208,7 @@ class JDatabaseImporterPostgresqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbo = null;
-		parent::tearDown();
+		unset($this->dbo);
 	}
 
 	/**
