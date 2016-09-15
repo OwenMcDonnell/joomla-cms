@@ -122,7 +122,7 @@ before_script:
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.enable=1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.auto_trace=1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.show_mem_delta=1 >> /etc/hhvm/php.ini; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.stats.memory=true >> /etc/hhvm/php.ini; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.stats.memory=true >> /etc/hhvm/php.ini; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then alias composer="hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer"; fi
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
 
