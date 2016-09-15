@@ -188,7 +188,7 @@ class JDatabaseImporterMysqlTest extends TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->dbo);
+		$this->dbo = null;
 	}
 
 	/**
