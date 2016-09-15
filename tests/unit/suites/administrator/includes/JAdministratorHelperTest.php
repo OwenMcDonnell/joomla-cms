@@ -48,7 +48,7 @@ class JAdministratorHelperTest extends TestCase
 	protected function tearDown()
 	{
 		$this->restoreFactoryState();
-		$this->user = null;
+		unset($this->user);
 	}
 
 	/**
