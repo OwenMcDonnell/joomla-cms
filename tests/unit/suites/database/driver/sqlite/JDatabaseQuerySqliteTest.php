@@ -59,8 +59,8 @@ class JDatabaseQuerySqliteTest extends TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbo = null;
-		$this->_instance = null;
+		unset($this->dbo);
+		unset($this->_instance);
 		parent::tearDown();
 	}
 
