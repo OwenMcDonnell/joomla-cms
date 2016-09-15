@@ -160,7 +160,7 @@ class JDatabaseExporterPdomysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbo = null;
+		unset($this->dbo);
 		parent::tearDown();
 	}
 
