@@ -146,8 +146,7 @@ class JDatabaseExporterPostgresqlTest extends TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbo = null;
-		parent::tearDown();
+		unset($this->dbo);
 	}
 
 	/**
