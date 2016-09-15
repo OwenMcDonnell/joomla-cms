@@ -192,7 +192,7 @@ class JDatabaseImporterPdomysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->dbo);
+		$this->dbo = null;
 		parent::tearDown();
 	}
 
