@@ -120,9 +120,9 @@ before_script:
   # Make sure all dev dependencies are installed
   - if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.enable=1 >> /etc/hhvm/php.ini; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.auto_trace=1 >> /etc/hhvm/php.ini; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.auto_trace=1 >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo xdebug.show_mem_delta=1 >> /etc/hhvm/php.ini; fi
-  #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.stats.memory=true >> /etc/hhvm/php.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.stats.memory=true >> /etc/hhvm/php.ini; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then alias composer="hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer"; fi
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
 
@@ -130,7 +130,7 @@ script:
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(get_loaded_extensions());'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo error_reporting=E_ALL >> /etc/hhvm/php.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo memory_limit -1 >> /etc/hhvm/php.ini; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(phpinfo());'; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'print_r(ini_get_all());'; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then hhvm --php -r 'var_dump(ini_get("memory_limit") / 1048576);'; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
