@@ -189,6 +189,7 @@ class JDatabaseImporterMysqlTest extends TestCase
 	protected function tearDown()
 	{
 		$this->dbo = null;
+		parent::tearDown();
 	}
 
 	/**
