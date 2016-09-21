@@ -86,9 +86,6 @@ matrix:
       group: edge # until the next update
       addons:
         apt:
-          sources:
-            - sourceline: 'deb http://dl.hhvm.com/ubuntu trusty main'
-              key_url: 'http://dl.hhvm.com/conf/hhvm.gpg.key'
           packages:
             - hhvm-nightly
             - mysql-server-5.6
@@ -164,14 +161,14 @@ services:
 before_install:
   #- "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
   - free -m
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get -y update; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y hhvm-nightly=2016.09.21~trusty; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo /etc/init.d/hhvm restart; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then sudo service hhvm restart; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then php --version; fi
-  #- sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhv*' ]; then phpenv config-add build/travis/phpenv/hhvm.php.ini; fi"
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhv*' ]; then phpenv config-add build/travis/phpenv/hhvm.php.ini; fi"
 
 before_script:
   # JavaScript tests
