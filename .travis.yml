@@ -32,38 +32,6 @@ matrix:
     #  env: RUN_JAVASCRIPT_TESTS="yes" RUN_UNIT_TESTS="no"
     #- php: 7.1
     #  env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
-    - php: hhvm-3.9
-      sudo: true
-      dist: trusty
-      group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
-      services:
-        - postgresql
-        - memcache
-        - memcached
-        - redis-server
-      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
-    - php: hhvm-3.12
-      sudo: true
-      dist: trusty
-      group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
-      services:
-        - postgresql
-        - memcache
-        - memcached
-        - redis-server
-      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm-3.15
       sudo: true
       dist: trusty
@@ -146,8 +114,6 @@ matrix:
         - redis-server
       env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
   allow_failures:
-    - php: hhvm-3.9
-    - php: hhvm-3.12
     - php: hhvm-3.15
     - php: hhvm-nightly
     - php: hhvm
@@ -163,10 +129,13 @@ before_install:
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-cache search hhvm-nightly; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-cache show hhvm-nightly; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get clean; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get -y update && sudo apt-get -y -qq upgrade; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f hhvm-nightly; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-cache show hhvm-nightly; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get download hhvm-nightly; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo dpkg --install ./hhvm-nightly_2016.09.22~trusty_amd64.deb; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get -y update && sudo apt-get -y -qq upgrade; fi
+  #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f hhvm-nightly; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo /etc/init.d/hhvm restart; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then sudo service hhvm restart; fi
   - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then php --version; fi
