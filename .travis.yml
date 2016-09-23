@@ -134,7 +134,7 @@ before_install:
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get clean; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-cache show hhvm-nightly; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get download hhvm-nightly; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo dpkg --install ./hhvm-nightly_2016.09.22~trusty_amd64.deb; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo dpkg --install ./hhvm-nightly_2016.09.23~trusty_amd64.deb; fi
   - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get -y update && sudo apt-get -y -qq upgrade; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f hhvm-nightly; fi
