@@ -128,6 +128,7 @@ services:
 before_install:
   #- "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
   - free -m
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo service hhvm stop; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-cache search hhvm-nightly; fi
@@ -139,8 +140,8 @@ before_install:
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get -y update && sudo apt-get -y -qq upgrade; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo apt-get install -y -f hhvm-nightly; fi
   #- if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo /etc/init.d/hhvm restart; fi
-  #- if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then sudo service hhvm restart; fi
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then php --version; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then sudo service hhvm restart; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then php --version; fi
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhv*' ]; then phpenv config-add build/travis/phpenv/hhvm.php.ini; fi"
 
 before_script:
