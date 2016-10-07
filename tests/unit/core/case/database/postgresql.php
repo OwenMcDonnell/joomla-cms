@@ -133,15 +133,15 @@ abstract class TestCaseDatabasePostgresql extends TestCaseDatabase
 
 		if (!empty(self::$_options['host']))
 		{
-		        $dsn .= 'host=' . self::$_options['host'] . ' ';
+		        $dsn .= 'host=' . self::$_options['host'] . ';';
 		}
 
 		if (!empty(self::$_options['port']))
 		{
-		        $dsn .= 'port=' . self::$_options['port'] . ' ';
+		        $dsn .= 'port=' . self::$_options['port'] . ';';
 		}
 
-		$dsn .= 'dbname=' . self::$_options['database'];
+		$dsn .= 'dbname=' . self::$_options['database'] . ';';
 
 		// Create the PDO object from the DSN and options.
 		$pdo = new PDO($dsn, self::$_options['user'], self::$_options['password']);
