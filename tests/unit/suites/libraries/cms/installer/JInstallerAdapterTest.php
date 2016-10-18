@@ -45,9 +45,9 @@ class JInstallerAdapterTest extends TestCaseDatabase
 		parent::setUp();
 
 		// Mock JFilter
-		$filterMock = $this->getMock('JFilterInput', array('filter'));
-		$filterSig = md5(serialize(array(array(), array(), 0, 0, 1)));
-		TestReflection::setValue('JFilterInput', 'instances', array($filterSig => $filterMock));
+		//$filterMock = $this->getMock('JFilterInput', array('filter'));
+		//$filterSig = md5(serialize(array(array(), array(), 0, 0, 1)));
+		//TestReflection::setValue('JFilterInput', 'instances', array($filterSig => $filterMock));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	protected function tearDown()
 	{
 		// Reset the filter instances.
-		TestReflection::setValue('JFilterInput', 'instances', array());
+		//TestReflection::setValue('JFilterInput', 'instances', array());
 
 		parent::tearDown();
 	}
