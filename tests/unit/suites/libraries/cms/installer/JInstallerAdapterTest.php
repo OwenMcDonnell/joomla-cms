@@ -17,6 +17,11 @@
 class JInstallerAdapterTest extends TestCaseDatabase
 {
 	/**
+	 * @var  JInstaller
+	 */
+	protected $object;
+
+	/**
 	 * Used in tests for callbacks involving JInstaller::setOverwrite()
 	 *
 	 * @var  boolean
@@ -44,10 +49,8 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	{
 		parent::setUp();
 
-		// Mock JFilter
-		//$filterMock = $this->getMock('JFilterInput', array('filter'));
-		//$filterSig = md5(serialize(array(array(), array(), 0, 0, 1)));
-		//TestReflection::setValue('JFilterInput', 'instances', array($filterSig => $filterMock));
+		// Mock JInstaller
+		$this->object = new JInstaller;
 	}
 
 	/**
@@ -59,8 +62,8 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	 */
 	protected function tearDown()
 	{
-		// Reset the filter instances.
-		//TestReflection::setValue('JFilterInput', 'instances', array());
+		// Reset the JInstaller instance.
+		unset($this->object);
 
 		parent::tearDown();
 	}
@@ -100,7 +103,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 		$object = $this->getMockForAbstractClass('JInstallerAdapter', array($mockInstaller, $mockDatabase));
 
 		// Set up a mock JTableExtension
-		$mockTableExtension = $this->getMock('JTableExtension', array('find', 'load'), array($this->getMockDatabase()));
+		$mockTableExtension = $this->getMock('JTableExtension', array('find', 'load'), $mockDatabase);
 
 		// A set of data for an extension
 		$type = 'plugin';
