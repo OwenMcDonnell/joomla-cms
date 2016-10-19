@@ -584,7 +584,7 @@ abstract class JLoader
 	 *
 	 * @since   11.3
 	 */
-	private static function _autoload($class)
+	public static function _autoload($class)
 	{
 		foreach (self::$prefixes as $prefix => $lookup)
 		{
@@ -609,7 +609,7 @@ abstract class JLoader
 	 *
 	 * @since   12.1
 	 */
-	private static function _load($class, $lookup)
+	public static function _load($class, $lookup)
 	{
 		// Split the class name into parts separated by camelCase.
 		$parts = preg_split('/(?<=[a-z0-9])(?=[A-Z])/x', $class);
