@@ -584,18 +584,18 @@ abstract class JLoader
 	 *
 	 * @since   11.3
 	 */
-	spl_autoload_register(function ($class)
+	public static function _autoload($class)
 	{
 		foreach (self::$prefixes as $prefix => $lookup)
 		{
 			$chr = strlen($prefix) < strlen($class) ? $class[strlen($prefix)] : 0;
-
 			if (strpos($class, $prefix) === 0 && ($chr === strtoupper($chr)))
 			{
-				include self::_load(substr($class, strlen($prefix)), $lookup);
+				return self::_load(substr($class, strlen($prefix)), $lookup);
 			}
 		}
-	});
+		return false;
+	}
 
 	/**
 	 * Load a class based on name and lookup array.
