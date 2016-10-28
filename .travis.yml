@@ -32,7 +32,7 @@ matrix:
     #  env: RUN_JAVASCRIPT_TESTS="yes" RUN_UNIT_TESTS="no"
     #- php: 7.1
     #  env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
-    - php: hhvm-3.15
+    - php: hhvm-nightly
       sudo: true
       dist: trusty
       group: edge # until the next update
@@ -63,24 +63,8 @@ matrix:
         - memcache
         - memcached
         - redis-server
-      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
-    - php: hhvm-3.15
-      sudo: true
-      dist: trusty
-      group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
-      services:
-        - postgresql
-        - memcache
-        - memcached
-        - redis-server
       env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
-# current is 3.15 dev
+# current is 3.15
     - php: hhvm
       sudo: true
       dist: trusty
@@ -116,7 +100,6 @@ matrix:
         - redis-server
       env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
   allow_failures:
-    - php: hhvm-3.15
     - php: hhvm-nightly
     - php: hhvm
 
@@ -127,7 +110,7 @@ services:
 
 before_install:
   #- "{ while ps aux --sort -rss | head; do sleep 5; done; } &"
-  - free -m
+  #- free -m
   #- sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhv*' ]; then phpenv config-add build/travis/phpenv/hhvm.php.ini; fi"
 
 before_script:
