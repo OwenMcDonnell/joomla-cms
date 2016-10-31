@@ -82,7 +82,7 @@ abstract class TestCaseDatabase extends PHPUnit_Extensions_Database_TestCase
 		// We always want the default database test case to use an SQLite memory database.
 		$options = array(
 			'driver' => 'sqlite',
-			'database' => ':memory:',
+			'database' => '::memory:',
 			'prefix' => 'jos_'
 		);
 
