@@ -104,6 +104,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 
 		// Set up a mock JTableExtension
 		$mockTableExtension = $this->getMock('JTableExtension', array('find', 'load'), (array) $mockDatabase);
+		var_dump($mockDatabase);
 		var_dump((array) $mockDatabase);
 		var_dump($mockTableExtension);
 
