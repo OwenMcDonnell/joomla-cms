@@ -239,21 +239,8 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 			// Lookup the fields for this table only once.
 			$name   = $this->_tbl;
 
-			if (method_exists($this->_db, 'getTableColumns'))
-			{
-				$fields = $this->_db->getTableColumns($name, false);
-			}
-			else
-			{
-				$fields = $this->_db->getTableFields($name, false);
-				
-				if (!isset($fields[$name]))
-				{
-					// We throw this one here because it brakes things if it's combined lower
-					throw new UnexpectedValueException(sprintf('No columns found for %s table', $name));
-				}
-			}
-
+			var_dump($this->_db);
+			$fields = $this->_db->getTableColumns($name, false);
 			
 			if (empty($fields))
 			{
