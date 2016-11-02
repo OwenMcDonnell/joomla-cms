@@ -246,10 +246,16 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 			else
 			{
 				$fields = $this->_db->getTableFields($name, false);
+				
+				if (!isset($fields[$name]))
+				{
+					// We throw this one here because it brakes things if it's combined lower
+					throw new UnexpectedValueException(sprintf('No columns found for %s table', $name));
+				}
 			}
 
 			
-			if (empty($fields) || !isset($fields[$name]))
+			if (empty($fields))
 			{
 				throw new UnexpectedValueException(sprintf('No columns found for %s table', $name));
 			}
