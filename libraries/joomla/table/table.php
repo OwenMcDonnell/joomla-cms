@@ -238,8 +238,6 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 		{
 			// Lookup the fields for this table only once.
 			$name   = $this->_tbl;
-
-			var_dump($this->_db);
 			$fields = $this->_db->getTableColumns($name, false);
 			
 			if (empty($fields))
