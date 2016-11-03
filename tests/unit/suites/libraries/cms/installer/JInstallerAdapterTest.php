@@ -1294,7 +1294,11 @@ class JInstallerAdapterTest extends TestCaseDatabase
 		TestReflection::setValue($object, 'route', 'update');
 
 		// Set up a mock JTableExtension
-		$mockTableExtension = $this->getMock('JTableExtension', array('find', 'load'), (array) $mockDatabase);
+		//$mockTableExtension = $this->getMock('JTableExtension', array('find', 'load'), (array) $mockDatabase);
+		$mockTableExtension = $this->getMockBuilder('JTableExtension')
+			->setMethods(array('find', 'load'))
+			->setConstructorArgs(array($this->getMockDatabase()))
+			->getMock();
 		$mockTableExtension->extension_id = 444;
 		TestReflection::setValue($object, 'extension', $mockTableExtension);
 
