@@ -114,7 +114,6 @@ before_install:
   #- sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhv*' ]; then phpenv config-add build/travis/phpenv/hhvm.php.ini; fi"
 
 before_script:
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then alias mysql='mysql --socket=/run/mysql-5.6/mysqld.sock'; fi
   # JavaScript tests
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/javascript-tests.sh $PWD; fi
   # Make sure all dev dependencies are installed
