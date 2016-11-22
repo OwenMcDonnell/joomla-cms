@@ -58,12 +58,12 @@ matrix:
       services:
         - postgresql
         - redis-server
-      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
 # current is 3.15
     - php: hhvm
       sudo: true
       dist: trusty
-      group: edge # until the next update
+      group: stable # until the next update
       addons:
         apt:
           packages:
@@ -86,7 +86,7 @@ matrix:
       services:
         - postgresql
         - redis-server
-      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
   allow_failures:
     - php: hhvm-nightly
     - php: hhvm
