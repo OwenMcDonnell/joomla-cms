@@ -42,6 +42,12 @@ matrix:
       sudo: true
       group: stable
       dist: trusty
+      addons:
+        apt:
+          packages:
+            - mysql-client5.6
+            - mysql-server5.6
+            - mysql-core5.6
       services:
         - postgresql
         - redis-server
@@ -50,6 +56,12 @@ matrix:
       sudo: true
       dist: trusty
       group: stable # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-client5.6
+            - mysql-server5.6
+            - mysql-core5.6
       services:
         - postgresql
         - redis-server
@@ -63,6 +75,9 @@ matrix:
         apt:
           packages:
             - libsnappy1
+            - mysql-client5.6
+            - mysql-server5.6
+            - mysql-core5.6
       services:
         - postgresql
         - redis-server
@@ -75,6 +90,9 @@ matrix:
         apt:
           packages:
             - libsnappy1
+            - mysql-client5.6
+            - mysql-server5.6
+            - mysql-core5.6
       services:
         - postgresql
         - redis-server
