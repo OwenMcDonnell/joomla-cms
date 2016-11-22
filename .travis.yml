@@ -55,6 +55,12 @@ matrix:
       sudo: true
       dist: trusty
       group: edge # until the next update
+      addons:
+        apt:
+          packages:
+            - mysql-client5.6
+            - mysql-server5.6
+            - mysql-core5.6
       services:
         - postgresql
         - redis-server
@@ -68,9 +74,8 @@ matrix:
         apt:
           packages:
             - libsnappy1
-            - mysql-client5.6
-            - mysql-server5.6
-            - mysql-core5.6
+            - mysql-client
+            - mysql-server
       services:
         - postgresql
         - redis-server
@@ -83,6 +88,8 @@ matrix:
         apt:
           packages:
             - libsnappy1
+            - mysql-client
+            - mysql-server
       services:
         - postgresql
         - redis-server
