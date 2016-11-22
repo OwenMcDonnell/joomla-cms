@@ -2,7 +2,7 @@
 sudo: false
 
 language: php
-
+group: beta # until the next update
 env:
   global:
     - RUN_PHPCS="no"
@@ -11,6 +11,12 @@ env:
     - INSTALL_MEMCACHE="yes"
     - INSTALL_MEMCACHED="yes"
     - INSTALL_REDIS="yes"
+
+addons:
+  apt:
+    packages:
+      - mysql-client
+      - mysql-server
 
 matrix:
   fast_finish: true
@@ -35,33 +41,16 @@ matrix:
     - php: hhvm-nightly
       sudo: true
       dist: trusty
-      group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
       services:
         - postgresql
-        - memcache
-        - memcached
         - redis-server
       env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm-nightly
       sudo: true
       dist: trusty
       group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
       services:
         - postgresql
-        - memcache
-        - memcached
         - redis-server
       env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
 # current is 3.15
@@ -73,13 +62,8 @@ matrix:
         apt:
           packages:
             - libsnappy1
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
       services:
         - postgresql
-        - memcache
-        - memcached
         - redis-server
       env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm
@@ -90,13 +74,8 @@ matrix:
         apt:
           packages:
             - libsnappy1
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
       services:
         - postgresql
-        - memcache
-        - memcached
         - redis-server
       env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
   allow_failures:
