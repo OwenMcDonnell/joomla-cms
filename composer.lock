@@ -22,7 +22,7 @@
                 "shasum": ""
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "5.*"
             },
             "type": "library",
             "autoload": {
@@ -73,7 +73,7 @@
                 "joomla/session": "^1.2.1",
                 "joomla/test": "~1.1",
                 "joomla/uri": "~1.1",
-                "phpunit/phpunit": "~4.8|~5.0",
+                "phpunit/phpunit": "~4.8|5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "suggest": {
@@ -162,7 +162,7 @@
             },
             "require-dev": {
                 "joomla/test": "~1.0",
-                "phpunit/phpunit": "~4.8|~5.0",
+                "phpunit/phpunit": "~4.8|5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -208,7 +208,7 @@
                 "php": ">=5.3.10"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -257,7 +257,7 @@
                 "php": ">=5.3.10|>=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8|~5.0",
+                "phpunit/phpunit": "~4.8|5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -305,7 +305,7 @@
             },
             "require-dev": {
                 "joomla/language": "~1.0",
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "suggest": {
@@ -356,7 +356,7 @@
             },
             "require-dev": {
                 "joomla/test": "~1.0",
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -406,7 +406,7 @@
             },
             "require-dev": {
                 "joomla/test": "~1.0",
-                "phpunit/phpunit": "~4.8|~5.0",
+                "phpunit/phpunit": "~4.8|5.*",
                 "squizlabs/php_codesniffer": "1.*",
                 "symfony/yaml": "~2.0|~3.0"
             },
@@ -461,7 +461,7 @@
                 "joomla/database": "~1.0",
                 "joomla/test": "~1.0",
                 "phpunit/dbunit": "~1.2",
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "suggest": {
@@ -505,7 +505,7 @@
             },
             "require-dev": {
                 "joomla/test": "~1.0",
-                "phpunit/phpunit": "~4.8|~5.0",
+                "phpunit/phpunit": "~4.8|5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -606,7 +606,7 @@
                 "php": ">=5.3.10"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
@@ -742,7 +742,7 @@
             },
             "require-dev": {
                 "phpdocumentor/phpdocumentor": "*",
-                "phpunit/phpunit": "4.7.*"
+                "phpunit/phpunit": "5.*"
             },
             "suggest": {
                 "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
@@ -1111,7 +1111,7 @@
                 "athletic/athletic": "~0.1.8",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "5.*",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "type": "library",
@@ -1270,7 +1270,7 @@
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "5.*"
             },
             "suggest": {
                 "dflydev/markdown": "~1.0",
@@ -1667,16 +1667,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.27",
+            "version": "5.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90"
+                "reference": "875145fabfa261fa9c1aea663dd29ddce92dca8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c062dddcb68e44b563f66ee319ddae2b5a322a90",
-                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/875145fabfa261fa9c1aea663dd29ddce92dca8f",
+                "reference": "875145fabfa261fa9c1aea663dd29ddce92dca8f",
                 "shasum": ""
             },
             "require": {
@@ -1758,7 +1758,7 @@
                 "sebastian/exporter": "~1.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "5.*"
             },
             "suggest": {
                 "ext-soap": "*"
