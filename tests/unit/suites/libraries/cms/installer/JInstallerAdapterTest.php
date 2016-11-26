@@ -98,15 +98,15 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	 */
 	public function testCheckExistingExtensionForExistingExtension()
 	{
-		$mockInstaller = $this->getMock('JInstaller');
-		$mockDatabase = $this->getMockDatabase();
-		$object = $this->getMockForAbstractClass('JInstallerAdapter', array($mockInstaller, $mockDatabase));
+		$mockInstaller = $this->getMockBuilder('JInstaller')->getMock();
+		//$mockDatabase = $this->getMockDatabase();
+		$object = $this->getMockForAbstractClass('JInstallerAdapter', array($mockInstaller, $this->getMockDatabase()));
 
 		// Set up a mock JTableExtension
 		var_dump("object mockTableExtension");
 		$mockTableExtension = $this->getMockBuilder('JTableExtension')
 					->setMethods(array('find', 'load'))
-					->setConstructorArgs((array) $mockDatabase)
+					->setConstructorArgs(array($this->getMockDatabase()))
 					->getMock();
 		var_dump($mockTableExtension);
 
