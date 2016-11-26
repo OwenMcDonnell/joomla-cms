@@ -62,6 +62,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	 */
 	protected function tearDown()
 	{
+		$this->restoreFactoryState();
 		// Reset the JInstaller instance.
 		unset($this->object);
 
@@ -99,8 +100,8 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	public function testCheckExistingExtensionForExistingExtension()
 	{
 		$mockInstaller = $this->getMockBuilder('JInstaller')->getMock();
-		//$mockDatabase = $this->getMockDatabase();
-		$object = $this->getMockForAbstractClass('JInstallerAdapter', array($mockInstaller, $this->getMockDatabase()));
+		$mockDatabase = $this->getMockDatabase();
+		$object = $this->getMockForAbstractClass('JInstallerAdapter', array($mockInstaller, $mockDatabase));
 
 		// Set up a mock JTableExtension
 		var_dump("object mockTableExtension");
@@ -108,7 +109,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 		
 		$mockTableExtension = $this->getMockBuilder('JTableExtension')
 					->setMethods(array('find', 'load'))
-					->setConstructorArgs(array(self::$driver))
+					->setConstructorArgs(array($this->getMockDatabase()))
 					->getMock();
 		
 		var_dump($mockTableExtension);
