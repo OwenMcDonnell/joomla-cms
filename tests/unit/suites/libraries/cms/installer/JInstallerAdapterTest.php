@@ -62,7 +62,6 @@ class JInstallerAdapterTest extends TestCaseDatabase
 	 */
 	protected function tearDown()
 	{
-		$this->restoreFactoryState();
 		// Reset the JInstaller instance.
 		unset($this->object);
 
@@ -109,7 +108,7 @@ class JInstallerAdapterTest extends TestCaseDatabase
 		
 		$mockTableExtension = $this->getMockBuilder('JTableExtension')
 					->setMethods(array('find', 'load'))
-					->setConstructorArgs(array($this->getMockDatabase()))
+					->setConstructorArgs(array(self::$driver))
 					->getMock();
 		
 		var_dump($mockTableExtension);
