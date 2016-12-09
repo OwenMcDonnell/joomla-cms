@@ -25,7 +25,7 @@ matrix:
     #  env: INSTALL_APCU="yes"
     - php: 5.6
       dist: trusty
-      group: beta # until the next update
+      group: beta # until the RC update
       env: INSTALL_APCU="yes"
       addons:
         apt:
@@ -43,7 +43,7 @@ matrix:
     - php: hhvm-nightly
       sudo: true
       dist: trusty
-      group: edge # until the next update
+      group: edge # until the next stable update
       addons:
         apt:
           packages:
