@@ -1,6 +1,5 @@
 # Forces new Travis-CI Infrastructure
 sudo: false
-
 language: php
 
 env:
@@ -25,7 +24,6 @@ matrix:
     #  env: INSTALL_APCU="yes"
     - php: 5.6
       dist: trusty
-      group: beta # until the RC update
       env: INSTALL_APCU="yes"
       addons:
         apt:
@@ -42,7 +40,6 @@ matrix:
     #  env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
     - php: hhvm-nightly
       dist: trusty
-      group: beta # until the next stable update
       addons:
         apt:
           packages:
@@ -54,9 +51,7 @@ matrix:
         - redis-server
       env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm-nightly
-      sudo: true
       dist: trusty
-      group: edge # until the next update
       addons:
         apt:
           packages:
@@ -66,11 +61,10 @@ matrix:
       services:
         - postgresql
         - redis-server
-      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
 # current is 3.15
     - php: hhvm
       dist: trusty
-      group: beta # until the next update
       addons:
         apt:
           packages:
@@ -83,9 +77,7 @@ matrix:
         - redis-server
       env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
     - php: hhvm
-      sudo: true
       dist: trusty
-      group: stable # until the next update
       addons:
         apt:
           packages:
@@ -96,7 +88,7 @@ matrix:
       services:
         - postgresql
         - redis-server
-      env: HHVMPHP7="no" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
+      env: HHVMPHP7="yes" INSTALL_APCU="no" INSTALL_APCU_BC_BETA="no" # Disabled items that currently do not work in travis-ci hhvm
   allow_failures:
     - php: hhvm-nightly
     - php: hhvm
