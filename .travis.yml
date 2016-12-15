@@ -1,6 +1,7 @@
 # Forces new Travis-CI Infrastructure
 sudo: false
 language: php
+group: edge
 
 env:
   global:
