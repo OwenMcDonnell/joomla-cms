@@ -728,7 +728,7 @@ class JRouterSite extends JRouter
 			$compname = ucfirst(substr($component, 4));
 			$class = $compname . 'Router';
 
-			if (!class_exists($class) || !class_exists($class, false))
+			if (!class_exists($class, false))
 			{
 				// Add the custom routing handler to the autoloader if it exists
 				JLoader::register($class, JPATH_SITE . '/components/' . $component . '/router.php');
