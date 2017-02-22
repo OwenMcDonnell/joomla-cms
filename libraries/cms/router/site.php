@@ -734,7 +734,7 @@ class JRouterSite extends JRouter
 				JLoader::register($class, JPATH_SITE . '/components/' . $component . '/router.php');
 			}
 
-			if (class_exists($class) || class_exists($class, false))
+			if (class_exists($class))
 			{
 				$reflection = new ReflectionClass($class);
 
