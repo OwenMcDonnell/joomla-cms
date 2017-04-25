@@ -21,7 +21,7 @@
  */
 
 namespace openwall\phpass;
-use PasswordHash;
+use openwall\phpass\PasswordHash as PasswordHash;
 
 /**
  * PasswordHash class is a portable password hashing framework for use in PHP applications.
