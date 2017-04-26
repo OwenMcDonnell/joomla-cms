@@ -86,19 +86,7 @@ class PasswordHash
 		}
 	}
 
-	/**
-	 *  A backwards compatable constructor
-	 *
-	 * @param int $iteration_count_log2 Logarithmic cost value used when generating hash values
-	 * @param boolean $portable_hashes
-	 *
-	 * @since 0.1.0
-	 * @throws InvalidArgumentException Thows an InvalidArgumentException if the $count parameter is not a positive integer.
-	 */
-	public function PasswordHash($iteration_count_log2, $portable_hashes)
-	{
-		self::__construct($iteration_count_log2, $portable_hashes);
-	}
+
 
 	/**
 	 * @param  int $count
