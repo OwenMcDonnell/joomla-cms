@@ -5,6 +5,7 @@ language: php
 
 env:
   global:
+    - RUN_PHPCS="no"
     - RUN_UNIT_TESTS="yes"
     - INSTALL_MEMCACHE="yes"
     - INSTALL_MEMCACHED="yes"
@@ -13,6 +14,8 @@ env:
 matrix:
   fast_finish: true
   include:
+    - php: 5.6
+      env: RUN_PHPCS="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
     - php: 5.3
       env: INSTALL_APC="yes"
     - php: 5.4
@@ -50,9 +53,12 @@ services:
 
 before_script:
   # Make sure all dev dependencies are installed
-  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then bash build/travis/unit-tests.sh $PWD; fi
+  - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
 
 script:
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs -i; fi
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --version; fi
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=Joomla --ignore=*/PHP_CodeSniffer/*,*/vendor/*,*/libraries/*,*/editors/*,*/lib/*,*/templates/*,*/tmpl/*,*/layouts/* $TRAVIS_BUILD_DIR.; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
 
 branches:
