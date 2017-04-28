@@ -27,6 +27,7 @@ services:
 before_script:
   # Make sure all dev dependencies are installed
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
+  - ls -alR libraries/vendor/bin/phpcs/
 
 script:
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs -i; fi
