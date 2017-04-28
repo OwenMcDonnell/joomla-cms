@@ -27,9 +27,10 @@ services:
 before_script:
   # Make sure all dev dependencies are installed
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
-  - ls -alR libraries/vendor/
+  #- ls -alR libraries/vendor/
 
 script:
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --config-set installed_paths ../../../; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs -i; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --version; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=libraries/vendor/bin/Joomla --ignore=*/PHP_CodeSniffer/*,*/vendor/*,*/libraries/*,*/editors/*,*/lib/*,*/templates/*,*/tmpl/*,*/layouts/* .; fi
