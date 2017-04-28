@@ -16,35 +16,8 @@ matrix:
   include:
     - php: 5.6
       env: RUN_PHPCS="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
-    - php: 5.3
-      env: INSTALL_APC="yes"
-    - php: 5.4
-      env: INSTALL_APC="yes"
-    - php: 5.5
-      env: INSTALL_APCU="yes"
-    - php: 5.6
-      env: INSTALL_APCU="yes"
-    - php: 7.0
-      env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
     - php: 7.1
       env: INSTALL_APCU="yes" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
-    - php: hhvm
-      sudo: true
-      dist: trusty
-      group: edge # until the next update
-      addons:
-        apt:
-          packages:
-            - mysql-server-5.6
-            - mysql-client-core-5.6
-            - mysql-client-5.6
-      services:
-        - mysql
-        - postgresql
-        - redis-server
-      env: INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" # Disabled items that currently do not work in travis-ci hhvm
-  allow_failures:
-    - php: hhvm
 
 services:
   - memcache
@@ -58,7 +31,7 @@ before_script:
 script:
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs -i; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --version; fi
-  #- if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=Joomla --ignore=*/PHP_CodeSniffer/*,*/vendor/*,*/libraries/*,*/editors/*,*/lib/*,*/templates/*,*/tmpl/*,*/layouts/* $TRAVIS_BUILD_DIR.; fi
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=libraries/vendor/bin/Joomla --ignore=*/PHP_CodeSniffer/*,*/vendor/*,*/libraries/*,*/editors/*,*/lib/*,*/templates/*,*/tmpl/*,*/layouts/* $TRAVIS_BUILD_DIR.; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
 
 branches:
