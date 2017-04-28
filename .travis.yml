@@ -34,7 +34,7 @@ script:
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs -i; fi
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --version; fi
 #  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=Joomla --ignore=*/PHP_CodeSniffer/*,*/vendor/*,*/libraries/*,*/editors/*,*/lib/*,*/templates/*,*/tmpl/*,*/layouts/* .; fi
-  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=Joomla-CMS .; fi
+  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --extensions=php --standard=Joomla-CMS .; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
 
 branches:
