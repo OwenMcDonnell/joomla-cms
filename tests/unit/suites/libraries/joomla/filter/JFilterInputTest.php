@@ -28,7 +28,8 @@ class JFilterInputTest extends \PHPUnit\Framework\TestCase
 	 */
 	public function casesGeneric()
 	{
-		$input = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`' .
+		$input = 'ͰͱͶͷͻͼΓΔΘθΣΦΨΩαβδλωϕϠϪϸϮԘԙԖԬԪ∓√∛∜∡∭∰∺≅≈≜⊾' .
+			'!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`' .
 			'abcdefghijklmnopqrstuvwxyz{|}~â‚¬â€šÆ’â€žâ€¦â€ â€¡Ë†â€°Å â€¹Å’Å½â€˜â€™â€œâ' .
 			'€�â€¢â€“â€”Ëœâ„¢Å¡â€ºÅ“Å¾Å¸Â¡Â¢Â£Â¤Â¥Â' .
 			'¦Â§Â¨Â©ÂªÂ«Â¬Â­Â®Â¯Â°Â±Â²Â³Â´ÂµÂ¶Â·' .
