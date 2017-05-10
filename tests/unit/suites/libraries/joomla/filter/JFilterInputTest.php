@@ -548,6 +548,12 @@ class JFilterInputTest extends \PHPUnit\Framework\TestCase
 				'<em><strong>Fred</strong></em>',
 				'From generic cases'
 			),
+			'Nested tags persian character' => array(
+				'',
+				'<em><strong>محمد</strong></em>',
+				'<em><strong>محمد</strong></em>',
+				'From generic cases'
+			),
 			'Malformed Nested tags' => array(
 				'',
 				'<em><strongFred</strong></em>',
