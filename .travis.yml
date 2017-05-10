@@ -1,6 +1,6 @@
 # Forces new Travis-CI Infrastructure
 sudo: false
-
+dist: trusty
 language: php
 
 env:
