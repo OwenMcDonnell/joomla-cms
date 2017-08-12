@@ -37,6 +37,11 @@ matrix:
     - php: 7.2
     - php: nightly
 
+addons:
+  apt_packages:
+    - ldap-utils
+    - slapd
+
 services:
   - memcache
   - memcached
