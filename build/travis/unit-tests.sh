@@ -2,8 +2,8 @@
 # Script for preparing the unit tests in Joomla!
 
 # PHP 7+ needs to have the LDAP extension manually enabled
-if [[ $TRAVIS_PHP_VERSION = "7.0" ]]; then echo 'extension=ldap.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
-if [[ $TRAVIS_PHP_VERSION -ge "7.1" ]]; then sudo apt-get install "php$TRAVIS_PHP_VERSION-ldap"; fi
+if [[ $TRAVIS_PHP_VERSION = 5.* || $TRAVIS_PHP_VERSION = "7.0" ]]; then echo 'extension=ldap.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+if [[ $TRAVIS_PHP_VERSION -ge "7.1" || $TRAVIS_PHP_VERSION != "nightly" ]]; then sudo apt-get install "php$TRAVIS_PHP_VERSION-ldap"; fi
 
 # Path to the Joomla! installation
 BASE="$1"
