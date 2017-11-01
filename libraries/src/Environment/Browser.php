@@ -279,13 +279,11 @@ class Browser
 
 				list ($this->majorVersion, $this->minorVersion) = explode('.', $version[1]);
 			}
-			elseif (preg_match('/Chrome[\/ ]([0-9.]+)/i', $this->agent, $version)
-				|| preg_match('/CrMo[\/ ]([0-9.]+)/i', $this->agent, $version)
-				|| preg_match('/CriOS[\/ ]([0-9.]+)/i', $this->agent, $version))
+			elseif (preg_match('/(Chrome|CrMo|CriOS)[\/]([0-9.]+)/i', $this->agent, $version))
 			{
 				$this->setBrowser('chrome');
 
-				list ($this->majorVersion, $this->minorVersion) = explode('.', $version[1]);
+				list ($this->majorVersion, $this->minorVersion) = explode('.', $version[2]);
 			}
 			elseif (strpos($this->lowerAgent, 'elaine/') !== false
 				|| strpos($this->lowerAgent, 'palmsource') !== false
