@@ -80,13 +80,14 @@ install:
     - IF %PHP%==1 echo extension=php_curl.dll >> php.ini
     # Get the Wincache DLLs
     - ps: >-
+        - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
         If ($env:PHP -eq "1") {
           If ($env:php_ver_target -eq "5.6") {$wincache = "1.3.7.12"} Else {$wincache = "2.0.0.8"}
           cd c:\tools\php\ext
-          $source = "http://windows.php.net/downloads/pecl/releases/wincache/$($wincache)/php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip"
-          $destination = "c:\projects\joomla-cms\php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip"
-          Invoke-WebRequest $source -OutFile $destination
-          #Start-FileDownload http://windows.php.net/downloads/pecl/releases/wincache/$($wincache)/php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip
+          #$source = "http://windows.php.net/downloads/pecl/releases/wincache/$($wincache)/php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip"
+          #$destination = "c:\projects\joomla-cms\php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip"
+          #Invoke-WebRequest $source -OutFile $destination
+          appveyor-retry appveyor DownloadFile http://windows.php.net/downloads/pecl/releases/wincache/$($wincache)/php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip
           7z x -y php_wincache-$($wincache)-$($env:php_ver_target)-nts-$($VC)-$($PHPBuild).zip > $null
           Remove-Item C:\tools\php\ext* -include .zip
           cd c:\tools\php}
